@@ -19,7 +19,13 @@ foreach host $hosts {
         "yes/no" {
             send -- "yes\r"
         }
+        "password" {
+            send -- "$password\r"
+            expect "yes/no"
+            send -- "yes\r"
+        }
         eof {
+            send_user "FAILED"
             continue
         }
     }
