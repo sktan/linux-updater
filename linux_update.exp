@@ -41,7 +41,7 @@ foreach host $hosts {
     }
     expect {
         "\\\$" {
-            send -- "sudo apt upgrade -y\r"
+            send -- "sudo apt upgrade -y -o Dpkg::Options::='--force-confold' \r"
             expect "\\\$"
             send -- "sudo apt autoremove -y\r"
             expect "\\\$"
