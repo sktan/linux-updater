@@ -24,5 +24,20 @@ vi hosts
 ansible-playbook -i hosts os_patcher.yml -v
 ```
 
+### Running on WSFL
+
+```
+# Setup SSH with key-agents
+$(ssh-agent)
+ssh-add ~/.ssh/id_rsa
+# Enforce Ansible configuration file
+export ANSIBLE_CONFIG="$(pwd)/ansible.cfg"
+
+# Execute patching (Python 3)
+python3 /usr/bin/ansible-playbook -i hosts os_patcher.yml -e 'ansible_python_interpreter=/usr/bin/python3' -e 'ansible_ssh_user=ec2-user'
+# Execute patching (Python 2)
+ansible-playbook -i hosts os_patcher.yml -e 'ansible_ssh_user=ec2-user'
+```
+
 ## Contributing
 Any pull requests or improvements are welcome, feel free to post any issues as well if you have any suggestions.
